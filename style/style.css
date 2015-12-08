@@ -1,0 +1,25 @@
+html, body {
+    height: 100%; margin: 0; padding: 0;
+    background-color: #182522;
+}
+
+#map {
+    width:75%;
+    height: 100%;
+    float: right;
+}
+
+#headline {
+    font-size: 2em;
+}
+
+#listBox {
+    color: white;
+    margin-left: 2%;
+    float: left;
+    font-family: "Helvetica Neue", Helvetica, Arial, bold;
+}
+
+#list {
+    font-size: 1em;
+}
