@@ -3,6 +3,10 @@ html, body {
     background-color: #182522;
 }
 
+li {
+    margin-bottom: 6px;
+}
+
 #map {
     width:75%;
     height: 100%;
