@@ -5,25 +5,42 @@ html, body {
 
 li {
     margin-bottom: 6px;
+    cursor: pointer;
 }
 
 #map {
-    width:75%;
+    width:73%;
     height: 100%;
     float: right;
 }
 
 #headline {
     font-size: 2em;
+    margin: auto;
+    text-align: center;
+    border-bottom: solid 1px white;
+    width: 50%;
+    margin-top: 5%;
+    margin-bottom: 7%;
+}
+
+#buttonBox {
+}
+
+.button {
+    margin-left: 3px;
 }
 
 #listBox {
+    max-width: 35%;
+    height: 100%;
+    background-color: #182522;
     color: white;
-    margin-left: 2%;
     float: left;
     font-family: "Helvetica Neue", Helvetica, Arial, bold;
 }
 
 #list {
     font-size: 1em;
+    margin-top: 20px;
 }
