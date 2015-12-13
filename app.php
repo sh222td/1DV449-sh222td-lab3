@@ -41,7 +41,7 @@ class App {
     }
 
     public function getTrafficURL() {
-        $result = file_get_contents('http://api.sr.se/api/v2/traffic/messages?format=json');
+        $result = file_get_contents('http://api.sr.se/api/v2/traffic/messages?format=json&pagination=true');
 
         $file = fopen('traffic.json', 'w');
         fwrite($file, $result);
