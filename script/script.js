@@ -1,12 +1,14 @@
 'use strict';
 
-// Global variables
+/* Global variables */
 var map;
 var activeInfoWindow = '';
 var markers = [];
 var traffic = [];
 
-// Initializes the map from the Google Map API
+/*
+* Initializes the map from the Google Map API
+*/
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 61.02, lng: 14.38},
@@ -14,6 +16,9 @@ function initMap() {
     });
 }
 
+/*
+* Makes an ajax call to the function that presents the result from the API call
+*/
 function callAjax() {
     $.ajax({
         type: "get",
@@ -24,6 +29,11 @@ function callAjax() {
     });
 }
 
+/*
+* Loop through all of the objects and insert them in an array.
+* Sorts the array by the date in milliseconds.
+* Checks also which category button that has been clicked on, then render out those withing that category.
+*/
 function getResult(data) {
     var json = $.parseJSON(data);
     $(json.messages).each(function() {
@@ -34,6 +44,19 @@ function getResult(data) {
 
     traffic.sort(function(a, b){
         return a.newDate-b.newDate
+    });
+
+    $(traffic).each(function() {
+        var item = this;
+        var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
+        var list = document.getElementById('list');
+        var listObject = document.createElement('li');
+        listObject.textContent = item.title;
+        list.appendChild(listObject);
+
+        var newMarker = createMarker(item);
+        toggleBounce(listObject, newMarker);
+        infoWindow(item, newMarker, newDateFormat);
     });
 
     $("#buttonAll").click(function() {
@@ -116,7 +139,6 @@ function getResult(data) {
         $(traffic).each(function() {
             var item = this;
             var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
-            console.log(this);
             if (item.category === 3) {
                 var list = document.getElementById('list');
                 var listObject = document.createElement('li');
@@ -130,8 +152,6 @@ function getResult(data) {
         });
     });
 }
-/*    }
- });*/
 
 function clearList() {
     var list = document.getElementById('list');
@@ -152,7 +172,9 @@ function removeMarkers() {
     markers = [];
 }
 
-/*  */
+/*
+* Creates a new google maps marker from each object
+*/
 function createMarker(item) {
     var myLatLng = {lat: item.latitude, lng: item.longitude};
     var marker = new google.maps.Marker({
@@ -162,11 +184,12 @@ function createMarker(item) {
     });
     markers.push(marker);
     return marker;
-
 }
 
+/*
+* Creates and presents an information window based on the chosen marker
+*/
 function infoWindow(item, marker, date) {
-
     var infowindow = new google.maps.InfoWindow({
         content: '<strong>'+item.title+'</strong><br>'+date.toLocaleString()+'<br>'+item.description+'<br>'+item.subcategory
     });
@@ -187,9 +210,11 @@ function infoWindow(item, marker, date) {
     });
 }
 
-// Function for managing the bounce effect when listobject is clicked
-function toggleBounce(listObject, marker) {
-    $(listObject).click(function() {
+/*
+* Function for managing the bounce effect when chosen item is clicked
+ */
+function toggleBounce(item, marker) {
+    $(item).click(function() {
         if (marker.getAnimation() != null) {
             marker.setAnimation(null);
         } else {

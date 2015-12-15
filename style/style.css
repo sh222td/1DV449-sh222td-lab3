@@ -25,6 +25,7 @@ li {
 }
 
 #buttonBox {
+    width: 114%;
 }
 
 .button {
@@ -32,10 +33,8 @@ li {
 }
 
 #listBox {
-    max-width: 33%;
+    width: 29%;
     height: 100%;
-    overflow: scroll;
-    overflow-x: hidden;
     background-color: #182522;
     color: white;
     float: left;
@@ -43,7 +42,10 @@ li {
 }
 
 #list {
-    max-width: 350px;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 680px;
+    max-width: 370px;
     font-size: 1em;
     margin-top: 20px;
 }

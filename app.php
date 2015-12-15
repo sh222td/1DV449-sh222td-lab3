@@ -34,7 +34,8 @@ class App {
                 <script async defer src=$properties></script>
             </body>
             <script src='script/script.js'></script>
-            <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+            <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+            <script src='//code.jquery.com/jquery-2.1.4.min.js'></script>
         </html>";
 
         return $view;
