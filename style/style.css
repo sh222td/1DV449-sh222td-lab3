@@ -9,7 +9,7 @@ li {
 }
 
 #map {
-    width:73%;
+    width: 67%;
     height: 100%;
     float: right;
 }
@@ -34,6 +34,8 @@ li {
 #listBox {
     max-width: 33%;
     height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
     background-color: #182522;
     color: white;
     float: left;

@@ -16,12 +16,10 @@ class App {
             <head>
                 <meta charset = 'UTF-8'>
                 <link rel='stylesheet' href='style/style.css' media='screen'>
-                <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
-                <script src='script/script.js'></script>
             </head>
             <body>
                 <div id='listBox'>
-                    <h2 id='headline'>Trafiklista</h2>
+                    <h2 id='headline'>Trafikklista</h2>
                     <div id='buttonBox'>
                     <input id='buttonAll' class='button' type='button' value='Samtliga'>
                     <input id='buttonRoadTraffic' class='button' type='button' value='Vägtrafik'>
@@ -35,16 +33,10 @@ class App {
                 <div id='map'></div>
                 <script async defer src=$properties></script>
             </body>
+            <script src='script/script.js'></script>
+            <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
         </html>";
 
         return $view;
-    }
-
-    public function getTrafficURL() {
-        $result = file_get_contents('http://api.sr.se/api/v2/traffic/messages?format=json&pagination=true');
-
-        $file = fopen('traffic.json', 'w');
-        fwrite($file, $result);
-        fclose($file);
     }
 }

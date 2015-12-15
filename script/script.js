@@ -14,126 +14,124 @@ function initMap() {
     });
 }
 
-$.ajax({
-    url: "./traffic.json",
-    dataType: "text",
-    success: function(data) {
-        var json = $.parseJSON(data);
-        var array = [];
-        $(json.messages).each(function() {
-            traffic.push(this);
+function callAjax() {
+    $.ajax({
+        type: "get",
+        url: "./getContent.php",
+        success: function(data){
+            getResult(data)
+        }
+    });
+}
+
+function getResult(data) {
+    var json = $.parseJSON(data);
+    $(json.messages).each(function() {
+        traffic.push(this);
+        var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
+        $.extend(this, {newDate:newDateFormat.getTime()});
+    });
+
+    traffic.sort(function(a, b){
+        return a.newDate-b.newDate
+    });
+
+    $("#buttonAll").click(function() {
+        clearList();
+        removeMarkers();
+        $(traffic).each(function() {
+            var item = this;
             var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
-            $.extend(this, {newDate:newDateFormat.getTime()})
-        });
+            var list = document.getElementById('list');
+            var listObject = document.createElement('li');
+            listObject.textContent = item.title;
+            list.appendChild(listObject);
 
-        traffic.sort(function(a, b){
-            return a.newDate- b.newDate
+            var newMarker = createMarker(item);
+            toggleBounce(listObject, newMarker);
+            infoWindow(item, newMarker, newDateFormat);
         });
+    });
 
-        $("#buttonAll").click(function() {
-            clearList();
-            removeMarkers();
-            $(traffic).each(function() {
-                var item = this;
-                var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
-                var newMarker = createMarker(item);
+    $("#buttonRoadTraffic").click(function() {
+        clearList();
+        removeMarkers();
+        $(traffic).each(function() {
+            var item = this;
+            var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
+            if (item.category === 0) {
                 var list = document.getElementById('list');
                 var listObject = document.createElement('li');
                 listObject.textContent = item.title;
                 list.appendChild(listObject);
 
+                var newMarker = createMarker(item);
                 toggleBounce(listObject, newMarker);
                 infoWindow(item, newMarker, newDateFormat);
-                console.log(this);
-            });
+            }
         });
+    });
 
-        $("#buttonRoadTraffic").click(function() {
-            clearList();
-            removeMarkers();
-            $(traffic).each(function() {
-                var item = this;
-                var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
-                console.log(this);
-                if (item.category === 0) {
+    $("#buttonCollectiveTraffic").click(function() {
+        clearList();
+        removeMarkers();
+        $(traffic).each(function() {
+            var item = this;
+            var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
+            if (item.category === 1) {
+                var list = document.getElementById('list');
+                var listObject = document.createElement('li');
+                listObject.textContent = item.title;
+                list.appendChild(listObject);
 
-                    var newMarker = createMarker(item);
-
-                    var list = document.getElementById('list');
-                    var listObject = document.createElement('li');
-                    listObject.textContent = item.title;
-                    list.appendChild(listObject);
-
-                    toggleBounce(listObject, newMarker);
-                    infoWindow(item, newMarker, newDateFormat);
-                }
-            });
+                var newMarker = createMarker(item);
+                toggleBounce(listObject, newMarker);
+                infoWindow(item, newMarker, newDateFormat);
+            }
         });
+    });
 
-        $("#buttonCollectiveTraffic").click(function() {
-            clearList();
-            removeMarkers();
-            $(traffic).each(function() {
-                var item = this;
-                var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
-                if (item.category === 1) {
-                    var newMarker = createMarker(item);
-                    var list = document.getElementById('list');
-                    var listObject = document.createElement('li');
-                    listObject.textContent = item.title;
-                    list.appendChild(listObject);
+    $("#buttonPlannedInterference").click(function() {
+        clearList();
+        removeMarkers();
+        $(traffic).each(function() {
+            var item = this;
+            var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
+            if (item.category === 2) {
+                var list = document.getElementById('list');
+                var listObject = document.createElement('li');
+                listObject.textContent = item.title;
+                list.appendChild(listObject);
 
-                    toggleBounce(listObject, newMarker);
-                    infoWindow(item, newMarker, newDateFormat);
-                }
-            });
+                var newMarker = createMarker(item);
+                toggleBounce(listObject, newMarker);
+                infoWindow(item, newMarker, newDateFormat);
+            }
         });
+    });
 
-        $("#buttonPlannedInterference").click(function() {
-            clearList();
-            removeMarkers();
-            $(traffic).each(function() {
-                var item = this;
-                var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
-                console.log(this);
-                if (item.category === 2) {
+    $("#buttonAlternative").click(function() {
+        clearList();
+        removeMarkers();
+        $(traffic).each(function() {
+            var item = this;
+            var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
+            console.log(this);
+            if (item.category === 3) {
+                var list = document.getElementById('list');
+                var listObject = document.createElement('li');
+                listObject.textContent = item.title;
+                list.appendChild(listObject);
 
-                    var newMarker = createMarker(item);
-
-                    var list = document.getElementById('list');
-                    var listObject = document.createElement('li');
-                    listObject.textContent = item.title;
-                    list.appendChild(listObject);
-
-                    toggleBounce(listObject, newMarker);
-                    infoWindow(item, newMarker, newDateFormat);
-                }
-            });
+                var newMarker = createMarker(item);
+                toggleBounce(listObject, newMarker);
+                infoWindow(item, newMarker, newDateFormat);
+            }
         });
-
-        $("#buttonAlternative").click(function() {
-            clearList();
-            removeMarkers();
-            $(traffic).each(function() {
-                var item = this;
-                var newDateFormat = new Date(parseInt(this.createddate.substr(6)));
-                console.log(this);
-                if (item.category === 3) {
-
-                    var newMarker = createMarker(item);
-
-                    var list = document.getElementById('list');
-                    var listObject = document.createElement('li');
-                    listObject.textContent = item.title;
-                    list.appendChild(listObject);
-
-                    toggleBounce(listObject, newMarker);
-                    infoWindow(item, newMarker, newDateFormat);
-                }
-            });
-        });
-    }
-});
+    });
+}
+/*    }
+ });*/
 
 function clearList() {
     var list = document.getElementById('list');
@@ -160,7 +158,6 @@ function createMarker(item) {
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        animation: google.maps.Animation.DROP,
         title: item.title
     });
     markers.push(marker);
@@ -200,6 +197,12 @@ function toggleBounce(listObject, marker) {
         }
     });
 }
+
+window.onload = function() {
+    initMap();
+    callAjax();
+};
+
 
 
 
