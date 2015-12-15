@@ -1,19 +1,18 @@
-<h1>Webbskrapa</h1>
-
-<h3>Här presenterar jag min webbskrapa/bokningssystemet för kursen 1DV449</h3>
+<h1>Laboration 3 Mashup</h1>
 
 =========
 
-<h3>Reflektionsfrågor</h3>
+<h3>ReflektionsfrÃ¥gor</h3>
 
 <ul>
-<li>Finns det några etiska aspekter vid webbskrapning. Kan du hitta något rättsfall?</li>
-Man ska alltid respektera ägaren till hemsidan, om det skulle stå i terms of use att ägaren inte vill att man ska skrapa innehållet så ska man låta det va.
-Det fanns ett fall 2001 där ett resebolag hade stämt en konkurrens för att ha skrapat deras priser, i syftet för att ha lägre priser än konkurrenterna. Fallet lades ner dock då det inte hade räckt av företaget att bara säga att de inte föredrog det.<br/>
-<li>Finns det några riktlinjer för utvecklare att tänka på om man vill vara "en god skrapare" mot serverägarna?</li>
-Man kan tänka på att identifiera sig i http headern med en http user agent. Innan man skrapar bör man även kolla igenom Terms of Use och robots.txt filen för att se vad ägaren av hesidan har för "regler". Något som även är bra att tänka på är att inte överbelasta originalsidan med en massa ständiga anrop, göra det i omgångar istället.
-<li>Begränsningar i din lösning- vad är generellt och vad är inte generellt i din kod?</li>
-Jag använder mig utav några strängberoenden vid till exempel när det ska skrivas ut vilken dag eller film som värdet i arrayen har. Detta kan innebära problem ifall en till dag eller film skulle läggas till. Skrapan är även beroende på att de svara med ett "ok" och inte något annat som ett "X" eller "ja". 
-<li>Vad kan robots.txt spela för roll?</li>
-Då de informerar sekmotorspindlar hur de ska hantera datan så kan man hindra eventuella oönskade skrapningar.
-</ul
+<li>Vad finns det fÃ¶r krav du mÃ¥ste anpassa dig efter i de olika API:erna?</li>
+
+<li>Hur och hur lÃ¤nga cachar du ditt data fÃ¶r att slippa anropa API:erna i onÃ¶dan?</li>
+Jag valde att cachea min trafikinformation i 15 minuter dÃ¥ det Ã¤r en tillrÃ¤ckligt lÃ¥ng tid ifall nÃ¤rverket skulle vara svajjigt fÃ¶r anvÃ¤ndaren men inte fÃ¶r lÃ¥ngt sÃ¥ att informationen fortfarande Ã¤r aktuell.
+<li>Vad finns det fÃ¶r risker kring sÃ¤kerhet och stabilitet i din applikation?</li>
+
+<li>Hur har du tÃ¤nkt kring sÃ¤kerheten i din applikation?</li>
+Min applikation Ã¤r ju frÃ¤mst skriven med javaskript sÃ¥ materialet finns tillgÃ¤ngligt fÃ¶r samtliga anvÃ¤ndare, dock sÃ¥ anvÃ¤nder jag mig inte utav nÃ¥gra input fÃ¤lt sÃ¥ det kan inte skickas in nÃ¥gra injections pÃ¥ sidan vilket gÃ¶r att den inte bryter mot A1.Injections. Datan som applikationen hanterar innehÃ¥ller heller inga personliga eller kÃ¤nsliga uppgifter som kan lÃ¤cka ut sÃ¥ den bryter inte mot A6.KÃ¤nslig Exponering av Data.
+<li>Hur har du tÃ¤nkt kring optimeringen i din applikation?</li>
+KodsmÃ¤ssigt sÃ¥ har jag fÃ¶rsÃ¶kt anvÃ¤nda mig sÃ¥ live som mÃ¶jligt av duplicerad kod genom att bryta ut de i mindre funktioner dÃ¤r jag skickar med objektet eller objektets marker som en parameter efter jag loopat igenom samtliga objekt.
+</ul>
