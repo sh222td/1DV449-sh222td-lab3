@@ -1,7 +1,6 @@
-<h1>Laboration 3 Mashup</h1>
+#Laboration 3 Mashup</h1>
 
 Länk till applikationen : http://sandrahansson.net/webbapi/
-=========
 
 <h3>Reflektionsfrågor</h3>
 
